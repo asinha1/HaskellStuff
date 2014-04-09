@@ -126,17 +126,16 @@ factorial' n = product [1..n]
 
 -- A more complicated list parser I wrote
 parse' :: (Ord a,Num a) => [a] -> String
-parse' [] = "empty string you douche"
+parse' [] = "empty list"
 parse' [x]
-  | x < numFucks  = "Negative number? Gay"
-  | x == numFucks = "Zero? What a faggot"
-  | x > numFucks  = "Literally want to kill myself after that"
-  where numFucks = 0
+  | x < 0  = "One negative number"
+  | x == 0 = "One zero"
+  | x > 0  = "One positive number"
 parse' (x:xs)
-  | length xs < numCocksInAss  = "niggerfaggot"
-  | length xs == numCocksInAss = "please go fuck your mother"
-  | length xs > numCocksInAss  = "I hope you get AIDS"
-  where numCocksInAss = 3
+  | length xs < minLen  = "short list"
+  | length xs == minLen = "medium size list"
+  | length xs > minLen  = "long list"
+  where minLen = 3
 
 reverse' :: [a] -> [a]
 reverse' [] = []
