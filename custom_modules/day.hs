@@ -1,0 +1,11 @@
+{- day.hs : the day modulue
+ -}
+
+module Day
+( Day(..)
+) where
+
+data Day = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
+           deriving (Eq, Ord, Show, Read, Bounded, Enum)
+
+

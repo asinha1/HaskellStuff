@@ -56,17 +56,27 @@ fromList' = foldr (\(k,v) acc -> Map.insert k v acc) Map.empty
  - working phonebook module will be made soon
  -}
 
+type PhoneNumber = String
+type Name = String
+type ContactList = [(Name,PhoneNumber)]
+type PhoneBook = Map.Map Name [PhoneNumber]
+
 -- Initialize a phonebook for the user
-createPhoneBook :: [(String,String)] -> Map.Map String [String]
+createPhoneBook :: ContactList -> PhoneBook
 createPhoneBook = Map.fromListWith (++) . map (\(k,v) -> (k,[v]))
 
 -- Add contact to phonebook
-addContact :: String -> String -> Map.Map String [String] -> 
-              Map.Map String [String]
+addContact :: Name -> PhoneNumber -> PhoneBook -> PhoneBook
 addContact k v book = Map.insertWith (++) k [v] book
 
 -- Add multiple contacts to phonebook
-addContacts :: [(String,String)] -> Map.Map String [String] ->
-                Map.Map String [String]
+addContacts :: ContactList -> PhoneBook -> PhoneBook
 addContacts list book = 
   foldr (\(k,v) acc -> Map.insertWith (++) k [v] acc) book list
+
+inPhoneBook :: Name -> PhoneNumber -> PhoneBook -> Bool
+inPhoneBook name pnumber pbook = 
+  case Map.lookup name pbook of
+    Nothing -> False
+    Just x -> pnumber `elem` x
+
