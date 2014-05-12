@@ -6,7 +6,8 @@
 
 -- Dont include the data types, bad security
 module Locker
-(
+( LockerState
+, Code
 ) where
 
 import qualified Data.Map as Map
